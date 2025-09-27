@@ -1,176 +1,314 @@
-# frozen_string_literal: true
-#
-# Uncomment this and change the path if necessary to include your own
-# components.
-# See https://github.com/heartcombo/simple_form#custom-components to know
-# more about custom components.
-# Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
-#
-# Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  # Wrappers are used by the form builder to generate a
-  # complete input. You can remove any component from the
-  # wrapper, change the order or even add your own to the
-  # stack. The options given below are used to wrap the
-  # whole input.
-  config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
-    ## Extensions enabled by default
-    # Any of these extensions can be disabled for a
-    # given input by passing: `f.input EXTENSION_NAME => false`.
-    # You can make any of these extensions optional by
-    # renaming `b.use` to `b.optional`.
+  # Button class (already Tailwind)
+  config.button_class = "relative inline-flex items-center rounded-md bg-sky-600 px-2.5 py-2 text-sm font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
 
-    # Determines whether to use HTML5 (:email, :url, ...)
-    # and required attributes
+  # Boolean label class (tailwind switch)
+  config.boolean_label_class = "ml-2 text-sm font-medium text-gray-700"
+
+  config.label_text = lambda { |label, required, explicit_label| "#{label} #{required}" }
+  config.boolean_style = :inline
+  config.item_wrapper_tag = :div
+  config.include_default_input_wrapper_class = false
+
+  config.error_notification_class = "rounded bg-red-100 p-4 mb-4 text-red-700 text-sm"
+  config.error_method = :to_sentence
+
+  config.input_field_error_class = "ring-2 ring-red-500"
+  config.input_field_valid_class = "ring-2 ring-green-500"
+
+  # Vertical form (default)
+  config.wrappers :vertical_form, class: "mb-4" do |b|
     b.use :html5
-
-    # Calculates placeholders automatically from I18n
-    # You can also pass a string as f.input placeholder: "Placeholder"
     b.use :placeholder
-
-    ## Optional extensions
-    # They are disabled unless you pass `f.input EXTENSION_NAME => true`
-    # to the input. If so, they will retrieve the values from the model
-    # if any exists. If you want to enable any of those
-    # extensions by default, you can change `b.optional` to `b.use`.
-
-    # Calculates maxlength from length validations for string inputs
-    # and/or database column lengths
     b.optional :maxlength
-
-    # Calculate minlength from length validations for string inputs
     b.optional :minlength
-
-    # Calculates pattern from format validations for string inputs
     b.optional :pattern
-
-    # Calculates min and max from length validations for numeric inputs
     b.optional :min_max
-
-    # Calculates readonly automatically from readonly attributes
     b.optional :readonly
-
-    ## Inputs
-    # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
-
-    ## full_messages_for
-    # If you want to display the full error message for the attribute, you can
-    # use the component :full_error, like:
-    #
-    # b.use :full_error, wrap_with: { tag: :span, class: :error }
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 placeholder-red-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
   end
 
-  # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :default
+  # Vertical boolean (checkbox/switch)
+  config.wrappers :vertical_boolean, tag: "fieldset", class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :form_check_wrapper, class: "flex items-center" do |bb|
+      bb.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      bb.use :label, class: "ml-2 text-sm font-medium text-gray-700"
+      bb.use :full_error, wrap_with: { class: "ml-6 text-sm text-red-600" }
+      bb.use :hint, wrap_with: { class: "ml-6 text-sm text-gray-500" }
+    end
+  end
 
-  # Define the way to render check boxes / radio buttons with labels.
-  # Defaults to :nested for bootstrap config.
-  #   inline: input + label
-  #   nested: label > input
-  config.boolean_style = :nested
+  # Vertical collection (radios/checkboxes)
+  config.wrappers :vertical_collection, item_wrapper_class: "flex items-center mb-2", item_label_class: "ml-2 text-sm font-medium text-gray-700", tag: "fieldset", class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :legend_tag, tag: "legend", class: "block text-sm font-medium text-gray-900 mb-2" do |ba|
+      ba.use :label_text
+    end
+    b.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Default class for buttons
-  config.button_class = 'btn'
+  config.wrappers :vertical_collection_inline, item_wrapper_class: "inline-flex items-center mr-4", item_label_class: "ml-2 text-sm font-medium text-gray-700", tag: "fieldset", class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :legend_tag, tag: "legend", class: "block text-sm font-medium text-gray-900 mb-2" do |ba|
+      ba.use :label_text
+    end
+    b.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Method used to tidy up errors. Specify any Rails Array method.
-  # :first lists the first message for each field.
-  # Use :to_sentence to list all errors for each field.
-  # config.error_method = :first
+  # File input
+  config.wrappers :vertical_file, class: "mb-4" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :readonly
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.use :input, class: "block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100", error_class: "block w-full text-sm text-red-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Default tag used for error notification helper.
-  config.error_notification_tag = :div
+  # Select input
+  config.wrappers :vertical_select, class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # CSS class to add for error notification helper.
-  config.error_notification_class = 'error_notification'
+  # Multi select
+  config.wrappers :vertical_multi_select, class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.wrapper class: "flex flex-row justify-between items-center" do |ba|
+      ba.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 mx-1", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 mx-1", valid_class: "ring-2 ring-green-500"
+    end
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Series of attempts to detect a default label method for collection.
-  # config.collection_label_methods = [ :to_label, :name, :title, :to_s ]
+  # Range input
+  config.wrappers :vertical_range, class: "mb-4" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :readonly
+    b.optional :step
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.use :input, class: "w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer", error_class: "w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer", valid_class: "ring-2 ring-green-500"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Series of attempts to detect a default value method for collection.
-  # config.collection_value_methods = [ :id, :to_s ]
+  # --- HORIZONTAL (2-column) FORM WRAPPERS ---
 
-  # You can wrap a collection of radio/check boxes in a pre-defined tag, defaulting to none.
-  # config.collection_wrapper_tag = nil
+  config.wrappers :horizontal_form, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # You can define the class to use on all collection wrappers. Defaulting to none.
-  # config.collection_wrapper_class = nil
+  config.wrappers :horizontal_boolean, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :grid_wrapper, class: "sm:col-span-2 sm:col-start-2" do |wr|
+      wr.wrapper :form_check_wrapper, class: "flex items-center" do |bb|
+        bb.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+        bb.use :label, class: "ml-2 text-sm font-medium text-gray-700"
+        bb.use :full_error, wrap_with: { class: "ml-6 text-sm text-red-600" }
+        bb.use :hint, wrap_with: { class: "ml-6 text-sm text-gray-500" }
+      end
+    end
+  end
 
-  # You can wrap each item in a collection of radio/check boxes with a tag,
-  # defaulting to :span.
-  # config.item_wrapper_tag = :span
+  config.wrappers :horizontal_collection, item_wrapper_class: "flex items-center mb-2", item_label_class: "ml-2 text-sm font-medium text-gray-700", class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # You can define a class to use in all item wrappers. Defaulting to none.
-  # config.item_wrapper_class = nil
+  config.wrappers :horizontal_collection_inline, item_wrapper_class: "inline-flex items-center mr-4", item_label_class: "ml-2 text-sm font-medium text-gray-700", class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required, explicit_label| "#{required} #{label}" }
+  config.wrappers :horizontal_file, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100", error_class: "block w-full text-sm text-red-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # You can define the class to use on all labels. Default is nil.
-  # config.label_class = nil
+  config.wrappers :horizontal_select, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # You can define the default class to be used on forms. Can be overridden
-  # with `html: { :class }`. Defaulting to none.
-  # config.default_form_class = nil
+  config.wrappers :horizontal_multi_select, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.wrapper class: "flex flex-row justify-between items-center" do |bb|
+        bb.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 mx-1", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600 mx-1", valid_class: "ring-2 ring-green-500"
+      end
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # You can define which elements should obtain additional classes
-  # config.generate_additional_classes_for = [:wrapper, :label, :input]
+  config.wrappers :horizontal_range, class: "grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 items-center" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :readonly
+    b.optional :step
+    b.use :label, class: "text-sm font-medium text-gray-900"
+    b.wrapper :grid_wrapper, class: "sm:col-span-2" do |ba|
+      ba.use :input, class: "w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer", error_class: "w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer", valid_class: "ring-2 ring-green-500"
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+      ba.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+    end
+  end
 
-  # Whether attributes are required by default (or not). Default is true.
-  # config.required_by_default = true
+  # Inline forms
+  config.wrappers :inline_form, class: "w-full" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: "sr-only"
+    b.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+    b.use :error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.optional :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Tell browsers whether to use the native HTML5 validations (novalidate form option).
-  # These validations are enabled in SimpleForm's internal config but disabled by default
-  # in this configuration, which is recommended due to some quirks from different browsers.
-  # To stop SimpleForm from generating the novalidate option, enabling the HTML5 validations,
-  # change this configuration to true.
-  config.browser_validations = false
+  config.wrappers :inline_boolean, class: "w-full" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :form_check_wrapper, class: "flex items-center" do |bb|
+      bb.use :input, class: "h-4 w-4 text-sky-600 border-gray-300 rounded focus:ring-sky-600", error_class: "h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      bb.use :label, class: "ml-2 text-sm font-medium text-gray-700"
+      bb.use :error, wrap_with: { class: "ml-6 text-sm text-red-600" }
+      bb.optional :hint, wrap_with: { class: "ml-6 text-sm text-gray-500" }
+    end
+  end
 
-  # Custom mappings for input types. This should be a hash containing a regexp
-  # to match as key, and the input type that will be used when the field name
-  # matches the regexp as value.
-  # config.input_mappings = { /count/ => :integer }
+  # Custom Boolean Switch
+  config.wrappers :custom_boolean_switch, class: "mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :form_check_wrapper, tag: "div", class: "flex items-center" do |bb|
+      bb.use :input, class: "h-4 w-8 rounded-full bg-gray-200 checked:bg-sky-600 focus:ring-sky-600 transition duration-200 align-middle", error_class: "h-4 w-8 rounded-full bg-red-200 checked:bg-red-600 focus:ring-red-600 transition duration-200 align-middle", valid_class: "ring-2 ring-green-500"
+      bb.use :label, class: "ml-2 text-sm font-medium text-gray-700"
+      bb.use :full_error, wrap_with: { tag: "div", class: "ml-6 text-sm text-red-600" }
+      bb.use :hint, wrap_with: { class: "ml-6 text-sm text-gray-500" }
+    end
+  end
 
-  # Custom wrappers for input types. This should be a hash containing an input
-  # type as key and the wrapper that will be used for all inputs with specified type.
-  # config.wrapper_mappings = { string: :prepend }
+  # Input Group (prepend/append)
+  config.wrappers :input_group, class: "mb-4" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: "block text-sm font-medium text-gray-900 mb-1"
+    b.wrapper :input_group_tag, class: "flex" do |ba|
+      ba.optional :prepend
+      ba.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 py-2 text-base text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600", error_class: "block w-full rounded-md border border-red-300 bg-white px-2.5 py-2 text-base text-red-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-600", valid_class: "ring-2 ring-green-500"
+      ba.optional :append
+      ba.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    end
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Namespaces where SimpleForm should look for custom input classes that
-  # override default inputs.
-  # config.custom_inputs_namespaces << "CustomInputs"
+  # Floating Labels (Tailwind only supports this visually via custom classes or plugins, so just use defaults)
+  config.wrappers :floating_labels_form, class: "relative mb-4" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 pt-6 pb-2 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 peer"
+    b.use :label, class: "absolute left-3 top-2 z-10 origin-[0] -translate-y-2 scale-75 transform px-1 text-gray-500 duration-300 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:scale-100 peer-focus:-translate-y-2 peer-focus:scale-75"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Default priority for time_zone inputs.
-  # config.time_zone_priority = nil
+  config.wrappers :floating_labels_select, class: "relative mb-4" do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :input, class: "block w-full rounded-md border border-gray-300 bg-white px-2.5 pt-6 pb-2 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-600 peer"
+    b.use :label, class: "absolute left-3 top-2 z-10 origin-[0] -translate-y-2 scale-75 transform px-1 text-gray-500 duration-300 peer-placeholder-shown:translate-y-2 peer-placeholder-shown:scale-100 peer-focus:-translate-y-2 peer-focus:scale-75"
+    b.use :full_error, wrap_with: { class: "mt-1 text-sm text-red-600" }
+    b.use :hint, wrap_with: { class: "mt-2 text-sm text-gray-500" }
+  end
 
-  # Default priority for country inputs.
-  # config.country_priority = nil
+  config.default_wrapper = :vertical_form
 
-  # When false, do not use translations for labels.
-  # config.translate_labels = true
-
-  # Automatically discover new inputs in Rails' autoload path.
-  # config.inputs_discovery = true
-
-  # Cache SimpleForm inputs discovery
-  # config.cache_discovery = !Rails.env.development?
-
-  # Default class for inputs
-  # config.input_class = nil
-
-  # Define the default class of the input wrapper of the boolean input.
-  config.boolean_label_class = 'checkbox'
-
-  # Defines if the default input wrapper class should be included in radio
-  # collection wrappers.
-  # config.include_default_input_wrapper_class = true
-
-  # Defines which i18n scope will be used in Simple Form.
-  # config.i18n_scope = 'simple_form'
-
-  # Defines validation classes to the input_field. By default it's nil.
-  # config.input_field_valid_class = 'is-valid'
-  # config.input_field_error_class = 'is-invalid'
+  config.wrapper_mappings = {
+    boolean:       :vertical_boolean,
+    check_boxes:   :vertical_collection,
+    date:          :vertical_multi_select,
+    datetime:      :vertical_multi_select,
+    file:          :vertical_file,
+    radio_buttons: :vertical_collection,
+    range:         :vertical_range,
+    time:          :vertical_multi_select,
+    select:        :vertical_select
+  }
 end

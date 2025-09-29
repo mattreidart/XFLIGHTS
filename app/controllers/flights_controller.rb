@@ -4,4 +4,8 @@ class FlightsController < ApplicationController
 
   def show
   end
+
+  # run search to DUFFLE API
+  def search
+  end
 end

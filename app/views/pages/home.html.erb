@@ -1,2 +1,51 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- app/views/pages/home.html.erb -->
+<h1>Search flights</h1>
+
+<%= form_with url: search_flights_path, method: :get, local: true do |f| %>
+  <div>
+    <label for="origin">From (IATA)</label><br>
+    <%= text_field_tag :origin, params[:origin], maxlength: 3, placeholder: "LHR", required: true %>
+  </div>
+
+  <div>
+    <label for="destination">To (IATA)</label><br>
+    <%= text_field_tag :destination, params[:destination], maxlength: 3, placeholder: "JFK", required: true %>
+  </div>
+
+  <div>
+    <label for="departure_date">Departure date</label><br>
+    <%= date_field_tag :departure_date, params[:departure_date], required: true %>
+  </div>
+
+  <fieldset style="margin:10px 0;padding:8px;border:1px solid #ddd;">
+    <legend>Departure time window (optional)</legend>
+    <div>
+      <label for="departure_time_from">Earliest (HH:MM)</label><br>
+      <%= time_field_tag :departure_time_from, params[:departure_time_from] %>
+    </div>
+    <div>
+      <label for="departure_time_to">Latest (HH:MM)</label><br>
+      <%= time_field_tag :departure_time_to, params[:departure_time_to] %>
+    </div>
+  </fieldset>
+
+  <div>
+    <label for="cabin_class">Cabin class</label><br>
+    <%= select_tag :cabin_class,
+          options_for_select(%w[economy premium_economy business first], params[:cabin_class] || "economy") %>
+  </div>
+
+  <div>
+    <label for="adults">Adults</label><br>
+    <%= number_field_tag :adults, (params[:adults] || 1), min: 1 %>
+  </div>
+
+  <div>
+    <label for="children">Children</label><br>
+    <%= number_field_tag :children, (params[:children] || 0), min: 0 %>
+  </div>
+
+  <div style="margin-top:12px;">
+    <%= submit_tag "Search flights" %>
+  </div>
+<% end %>

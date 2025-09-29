@@ -12,22 +12,18 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.new(flight: @flight)
   end
 
-  def show; end
-
-  def new
-    @flight = Flight.find(params[:flight_id])
-    @booking = current_user.bookings.new(flight: @flight)
+  def show
+  end
 
   def create
     @flight = Flight.find(params[:flight_id])
     @booking = current_user.bookings.new(booking_params.merge(flight: @flight, status: 'confirmed'))
 
-    if booking.save
-      redirect_to booking_path, notice: "Booking successfully created"
+    if @booking.save
+      redirect_to booking_path(@booking), notice: "Booking successfully created"
     else
       render :new, status: :unprocessable_entity
     end
-    # redirect_to booking_path(@booking), notice: "Booking successfully created"
   end
 
   def destroy

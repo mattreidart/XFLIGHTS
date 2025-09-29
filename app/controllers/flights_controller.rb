@@ -3,7 +3,7 @@ class FlightsController < ApplicationController
     @flights = Flight.all
   end
 
-  def show;
+  def show
   end
 
   def search

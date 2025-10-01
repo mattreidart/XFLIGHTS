@@ -7,14 +7,54 @@ class FlightsController < ApplicationController
   end
 
   def search
-    if params[:origin].blank? || params[:destination].blank? || params[:start_date].blank? || params[:end_date].blank?
-      @flights = []
-      flash.now[:alert] = "All search fields are required."
+    # API call, remember to run bundle install
+    response = HTTParty.post(
+      'https://api.duffel.com/air/offer_requests',
+      headers: {
+        'Authorization' => "Bearer #{ENV['DUFFEL_API_KEY']}",
+        'Content-Type' => 'application/json',
+        'Duffel-Version' => 'v2'
+      },
+      body: {
+        data: {
+          slices: [
+            {
+              origin: params[:origin],
+              destination: params[:destination],
+              departure_date: params[:departure_date]
+            }
+          ],
+          # Passenger types: adult, child, infant_without_seat
+          passengers: [
+            { type: params[:type]}
+          ],
+          # Cabin classes: economy, premium_economy, business, first
+          cabin_class: params[:cabin_class]
+        }
+      }.to_json
+    )
+
+    #checks if API call was successful
+    if response.success?
+      @offer_request_id = response['data'].first['id']
+
+      offers_request = HTTParty.get(
+        "https://api.duffel.com/air/offers?offer_request_id=#{@offer_request_id}",
+        headers: {
+          'Authorization' => "Bearer #{ENV['DUFFEL_API_KEY']}",
+          'Duffel-Version' => 'v2'
+        }
+      )
+      if offers_request.success?
+        @offers = offers_request['data']
+      else
+        flash[:error] = "unable to fetch orders"
+        redirect_to root_path
+      end
     else
-      @flights = Flight.where(origin: params[:origin], destination: params[:destination])
-        .where("departure >= ? AND departure <= ?", params[:start_date], params[:end_date])
+      flash[:error] = "Search failed: #{response['errors']&.first&.dig('message')}"
+      redirect_to root_path
     end
-    render :index
   end
 
   private
@@ -23,3 +63,5 @@ class FlightsController < ApplicationController
     @flight = Flight.find(params[:id])
   end
 end
+
+

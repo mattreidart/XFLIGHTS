@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_27_055503) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_02_075928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,15 +19,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_27_055503) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "flight_id", null: false
-    t.index ["flight_id"], name: "index_airlines_on_flight_id"
   end
 
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "price"
     t.bigint "flight_id", null: false
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -39,6 +36,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_27_055503) do
     t.string "destination"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "airline_id", null: false
+    t.integer "price"
+    t.datetime "departure"
+    t.datetime "arrival"
+    t.index ["airline_id"], name: "index_flights_on_airline_id"
+    t.index ["departure"], name: "index_flights_on_departure"
+    t.index ["destination"], name: "index_flights_on_destination"
+    t.index ["origin"], name: "index_flights_on_origin"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,9 +52,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_27_055503) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "airlines", "flights"
   add_foreign_key "bookings", "flights"
   add_foreign_key "bookings", "users"
+  add_foreign_key "flights", "airlines"
 end

@@ -1,13 +1,43 @@
 <% if @flights.empty? %>
   <p>No flights found. Try adjusting your search criteria.</p>
-
-<% @flights.each do |flight| %>
-  <div class="flight">
-    <p>Flight Number: <%= flight.flight_number %></p>
-    <p>Airline: <%=flight.airline.name%></p>
-    <p>From: <%= flight.origin %></p>
-    <p>To: <%= flight.destination %></p>
-    <p>Departure: <%= flight.departure %></p>
-    <p>Price: $<%= flight.price %></p>
+<%end%>
+  <div class="mt-4">
+    <%= simple_form_for :search, url: search_flights_path, method: :get do |f| %>
+      <%= f.input :origin, placeholder: "From" %>
+      <%= f.input :destination, placeholder: "To" %>
+      <%= f.input :departure, as: :date, html5: true %>
+      <%= f.input :round_trip, as: :boolean, label: "Round trip" %>
+      <%= f.input :return_date, as: :date, html5: true, wrapper_html: { id: 'return-date-field', style: 'display: none;' } %>
+      <%= f.button :submit, "Search Flights" %>
+    <% end %>
   </div>
-<% end %>
+
+<div class="bg-purple-200">
+  <div class="flex bg-purple-200 flex-col items-center space-y-6">
+    <% @flights.each do |flight| %>
+      <div class="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl space-y-4 md:space-y-0 md:space-x-6">
+        <!-- Airline Logo -->
+        <div class="flex-shrink-0">
+          <img class="h-24 w-48 object-cover rounded" src="<%= flight.airline.logo %>" alt="Airline Logo">
+        </div>
+
+        <!-- Flight Details -->
+        <div class="flex-1 text-gray-800">
+          <p class="font-semibold"><%= flight.airline.name %> : <%= flight.flight_number %> </p>
+          <p>From: <%= flight.origin %></p>
+          <p>Departure: <%= flight.departure.strftime("%b %d, %Y %I:%M %p") %></p>
+          <p>To: <%= flight.destination %></p>
+          <p>Arrival: <%= flight.arrival.strftime("%b %d, %Y %I:%M %p") %></p>
+        </div>
+
+        <!-- Price -->
+        <div class="text-right">
+          <p class="text-lg font-bold text-green-600">Price: $<%= flight.price %></p>
+          <p>
+
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -35,7 +35,7 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = current_user.bookings.find(params[:id])
-end
+  end
 
   def booking_params
     params.require(:booking).permit(:passengers)

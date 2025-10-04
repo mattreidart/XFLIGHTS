@@ -9,6 +9,8 @@ class FlightsController < ApplicationController
   def search
     #All flights
     @flights = Flight.all
+    #access params[search]
+    search_params = params[:search] || {}
     #Match origin and destination
     @flights = @flights.where(origin: params[:origin]) if params[:origin].present?
     @flights = @flights.where(destination: params[:destination]) if params[:destination].present?

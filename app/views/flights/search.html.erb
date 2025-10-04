@@ -1,29 +1,45 @@
-<% if @flights.empty? %>
-  <p>No flights found. Try adjusting your search criteria.</p>
-<%end%>
-  <div class="mt-4">
-    <%= simple_form_for :search, url: search_flights_path, method: :get do |f| %>
-      <%= f.input :origin, placeholder: "From" %>
-      <%= f.input :destination, placeholder: "To" %>
-      <%= f.input :departure, as: :date, html5: true %>
-      <%= f.input :round_trip, as: :boolean, label: "Round trip" %>
-      <%= f.input :return_date, as: :date, html5: true, wrapper_html: { id: 'return-date-field', style: 'display: none;' } %>
-      <%= f.button :submit, "Search Flights" %>
-    <% end %>
-  </div>
 
-<div class="bg-purple-200">
-  <div class="flex bg-purple-200 flex-col items-center space-y-6">
+<%# Show empty state %>
+<% if @flights.empty? %>
+  <p class="text-center text-gray-500 text-lg mt-6">No flights found. Try adjusting your search criteria.</p>
+<% end %>
+
+<%# Search form %>
+<div class="mt-8 max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
+  <%= simple_form_for :search, url: search_flights_path, method: :get, html: { class: "space-y-4" } do |f| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <%= f.input :origin, placeholder: "From", input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%= f.input :destination, placeholder: "To", input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <%= f.input :departure, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%= f.input :round_trip, as: :boolean, label: "Round trip", label_html: { class: "text-gray-700" } %>
+    </div>
+
+    <div id="return-date-field" style="display: none;">
+      <%= f.input :return_date, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+    </div>
+
+    <div>
+      <%= f.button :submit, "Search Flights", class: "w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition" %>
+    </div>
+  <% end %>
+</div>
+
+<%# Flights display section %>
+<div class="bg-purple-50 py-10">
+  <div class="flex flex-col items-center space-y-6">
     <% @flights.each do |flight| %>
-      <div class="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl space-y-4 md:space-y-0 md:space-x-6">
+      <div class="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl space-y-4 md:space-y-0 md:space-x-6 transition hover:shadow-xl">
         <!-- Airline Logo -->
         <div class="flex-shrink-0">
           <img class="h-24 w-48 object-cover rounded" src="<%= flight.airline.logo %>" alt="Airline Logo">
         </div>
 
         <!-- Flight Details -->
-        <div class="flex-1 text-gray-800">
-          <p class="font-semibold"><%= flight.airline.name %> : <%= flight.flight_number %> </p>
+        <div class="flex-1 text-gray-800 space-y-1">
+          <p class="font-semibold text-lg"><%= flight.airline.name %> : <%= flight.flight_number %></p>
           <p>From: <%= flight.origin %></p>
           <p>Departure: <%= flight.departure.strftime("%b %d, %Y %I:%M %p") %></p>
           <p>To: <%= flight.destination %></p>
@@ -33,9 +49,6 @@
         <!-- Price -->
         <div class="text-right">
           <p class="text-lg font-bold text-green-600">Price: $<%= flight.price %></p>
-          <p>
-
-          </p>
         </div>
       </div>
     <% end %>

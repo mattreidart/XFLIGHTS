@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'users/show'
-  get 'bookings/new'
-  get 'bookings/create'
-  get 'bookings/index'
-  get 'flights/index'
-  get 'flights/show'
   root to: "pages#home"
 
   get 'flights/search', to: 'flights#search', as: :search_flights

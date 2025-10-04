@@ -1,3 +1,5 @@
+require 'simple_form'
+
 SimpleForm.setup do |config|
   # Button class (already Tailwind)
   config.button_class = "relative inline-flex items-center rounded-md bg-sky-600 px-2.5 py-2 text-sm font-semibold text-white shadow-xs hover:bg-sky-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"

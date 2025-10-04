@@ -1,0 +1,13 @@
+<% if @flights.empty? %>
+  <p>No flights found. Try adjusting your search criteria.</p>
+
+<% @flights.each do |flight| %>
+  <div class="flight">
+    <p>Flight Number: <%= flight.flight_number %></p>
+    <p>Airline: <%=flight.airline.name%></p>
+    <p>From: <%= flight.origin %></p>
+    <p>To: <%= flight.destination %></p>
+    <p>Departure: <%= flight.departure %></p>
+    <p>Price: $<%= flight.price %></p>
+  </div>
+<% end %>

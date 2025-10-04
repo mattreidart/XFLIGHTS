@@ -1,0 +1,712 @@
+{
+  "data": [
+
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8I",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCL",
+        "name": "Qantas",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/QF.svg",
+        "iata_code": "QF"
+      },
+      "total_amount": "538.00",
+      "total_currency": "AUD",
+      "tax_amount": "81.00",
+      "tax_currency": "AUD",
+      "base_amount": "457.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8J",
+          "origin": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "duration": "PT1H35M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8K",
+              "origin": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "departing_at": "2025-10-20T16:30:00+11:00",
+              "arriving_at": "2025-10-20T18:05:00+11:00",
+              "duration": "PT1H35M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCL",
+                "name": "Qantas",
+                "iata_code": "QF"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCL",
+                "name": "Qantas",
+                "iata_code": "QF"
+              },
+              "operating_carrier_flight_number": "456",
+              "marketing_carrier_flight_number": "456",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHf",
+                "name": "Boeing 737-800",
+                "iata_code": "738"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P8L",
+                  "baggages": [
+                    {
+                      "type": "checked",
+                      "quantity": 1
+                    },
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P8L",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "50.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": false
+        }
+      }
+    },
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8M",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCM",
+        "name": "Virgin Australia",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/VA.svg",
+        "iata_code": "VA"
+      },
+      "total_amount": "495.00",
+      "total_currency": "AUD",
+      "tax_amount": "76.00",
+      "tax_currency": "AUD",
+      "base_amount": "419.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8N",
+          "origin": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "duration": "PT1H40M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8O",
+              "origin": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "departing_at": "2025-10-20T18:45:00+11:00",
+              "arriving_at": "2025-10-20T20:25:00+11:00",
+              "duration": "PT1H40M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCM",
+                "name": "Virgin Australia",
+                "iata_code": "VA"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCM",
+                "name": "Virgin Australia",
+                "iata_code": "VA"
+              },
+              "operating_carrier_flight_number": "854",
+              "marketing_carrier_flight_number": "854",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHg",
+                "name": "Boeing 737-800",
+                "iata_code": "738"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P8P",
+                  "baggages": [
+                    {
+                      "type": "checked",
+                      "quantity": 1
+                    },
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P8P",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "75.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": true,
+          "penalty_amount": "150.00",
+          "penalty_currency": "AUD"
+        }
+      }
+    },
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8Q",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCN",
+        "name": "Jetstar",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/JQ.svg",
+        "iata_code": "JQ"
+      },
+      "total_amount": "315.00",
+      "total_currency": "AUD",
+      "tax_amount": "43.00",
+      "tax_currency": "AUD",
+      "base_amount": "272.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8R",
+          "origin": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "duration": "PT1H40M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8S",
+              "origin": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "departing_at": "2025-10-20T11:20:00+11:00",
+              "arriving_at": "2025-10-20T13:00:00+11:00",
+              "duration": "PT1H40M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCN",
+                "name": "Jetstar",
+                "iata_code": "JQ"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCN",
+                "name": "Jetstar",
+                "iata_code": "JQ"
+              },
+              "operating_carrier_flight_number": "518",
+              "marketing_carrier_flight_number": "518",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHh",
+                "name": "Airbus A320",
+                "iata_code": "320"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy Starter",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P8T",
+                  "baggages": [
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P8T",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "99.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": false
+        }
+      }
+    },
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8X",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCL",
+        "name": "Qantas",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/QF.svg",
+        "iata_code": "QF"
+      },
+      "total_amount": "542.50",
+      "total_currency": "AUD",
+      "tax_amount": "82.50",
+      "tax_currency": "AUD",
+      "base_amount": "460.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8Y",
+          "origin": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "duration": "PT1H35M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8Z",
+              "origin": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "departing_at": "2025-10-15T08:00:00+11:00",
+              "arriving_at": "2025-10-15T09:35:00+11:00",
+              "duration": "PT1H35M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCL",
+                "name": "Qantas",
+                "iata_code": "QF"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCL",
+                "name": "Qantas",
+                "iata_code": "QF"
+              },
+              "operating_carrier_flight_number": "401",
+              "marketing_carrier_flight_number": "401",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHf",
+                "name": "Boeing 737-800",
+                "iata_code": "738"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P90",
+                  "baggages": [
+                    {
+                      "type": "checked",
+                      "quantity": 1
+                    },
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P90",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "50.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": false
+        }
+      }
+    },
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8A",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCM",
+        "name": "Virgin Australia",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/VA.svg",
+        "iata_code": "VA"
+      },
+      "total_amount": "489.00",
+      "total_currency": "AUD",
+      "tax_amount": "75.00",
+      "tax_currency": "AUD",
+      "base_amount": "414.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8B",
+          "origin": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "duration": "PT1H40M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8C",
+              "origin": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "departing_at": "2025-10-15T10:30:00+11:00",
+              "arriving_at": "2025-10-15T12:10:00+11:00",
+              "duration": "PT1H40M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCM",
+                "name": "Virgin Australia",
+                "iata_code": "VA"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCM",
+                "name": "Virgin Australia",
+                "iata_code": "VA"
+              },
+              "operating_carrier_flight_number": "823",
+              "marketing_carrier_flight_number": "823",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHg",
+                "name": "Boeing 737-800",
+                "iata_code": "738"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P8D",
+                  "baggages": [
+                    {
+                      "type": "checked",
+                      "quantity": 1
+                    },
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P8D",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "75.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": true,
+          "penalty_amount": "150.00",
+          "penalty_currency": "AUD"
+        }
+      }
+    },
+    {
+      "id": "off_0000AUnJbudRhdEXwW6P8E",
+      "live_mode": false,
+      "created_at": "2025-10-01T10:30:00Z",
+      "updated_at": "2025-10-01T10:30:00Z",
+      "expires_at": "2025-10-01T22:30:00Z",
+      "owner": {
+        "id": "arl_00009hj8USM7Ncg31cBCN",
+        "name": "Jetstar",
+        "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/JQ.svg",
+        "iata_code": "JQ"
+      },
+      "total_amount": "325.00",
+      "total_currency": "AUD",
+      "tax_amount": "45.00",
+      "tax_currency": "AUD",
+      "base_amount": "280.00",
+      "base_currency": "AUD",
+      "passenger_identity_documents_required": false,
+      "payment_requirements": {
+        "requires_instant_payment": false,
+        "price_guarantee_expires_at": "2025-10-01T22:30:00Z",
+        "payment_required_by": "2025-10-03T10:30:00Z"
+      },
+      "slices": [
+        {
+          "id": "sli_0000AUnJbudRhdEXwW6P8F",
+          "origin": {
+            "type": "airport",
+            "id": "arp_syd_au",
+            "iata_code": "SYD",
+            "name": "Sydney Kingsford Smith International Airport",
+            "city_name": "Sydney"
+          },
+          "destination": {
+            "type": "airport",
+            "id": "arp_mel_au",
+            "iata_code": "MEL",
+            "name": "Melbourne Airport",
+            "city_name": "Melbourne"
+          },
+          "duration": "PT1H40M",
+          "segments": [
+            {
+              "id": "seg_0000AUnJbudRhdEXwW6P8G",
+              "origin": {
+                "type": "airport",
+                "id": "arp_syd_au",
+                "iata_code": "SYD",
+                "name": "Sydney Kingsford Smith International Airport"
+              },
+              "destination": {
+                "type": "airport",
+                "id": "arp_mel_au",
+                "iata_code": "MEL",
+                "name": "Melbourne Airport"
+              },
+              "departing_at": "2025-10-15T14:15:00+11:00",
+              "arriving_at": "2025-10-15T15:55:00+11:00",
+              "duration": "PT1H40M",
+              "operating_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCN",
+                "name": "Jetstar",
+                "iata_code": "JQ"
+              },
+              "marketing_carrier": {
+                "id": "arl_00009hj8USM7Ncg31cBCN",
+                "name": "Jetstar",
+                "iata_code": "JQ"
+              },
+              "operating_carrier_flight_number": "507",
+              "marketing_carrier_flight_number": "507",
+              "aircraft": {
+                "id": "arc_00009VMF8AhXSSRnQSNqHh",
+                "name": "Airbus A320",
+                "iata_code": "320"
+              },
+              "passengers": [
+                {
+                  "cabin_class": "economy",
+                  "cabin_class_marketing_name": "Economy Starter",
+                  "passenger_id": "pas_0000AUnJbudRhdEXwW6P8H",
+                  "baggages": [
+                    {
+                      "type": "carry_on",
+                      "quantity": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passengers": [
+        {
+          "id": "pas_0000AUnJbudRhdEXwW6P8H",
+          "type": "adult",
+          "given_name": null,
+          "family_name": null,
+          "age": null
+        }
+      ],
+      "conditions": {
+        "change_before_departure": {
+          "allowed": true,
+          "penalty_amount": "99.00",
+          "penalty_currency": "AUD"
+        },
+        "refund_before_departure": {
+          "allowed": false
+        }
+      }
+    }
+  ],
+  "meta": {
+    "request_id": "FgJmVDk3K2gzOGpGbE13VR=="
+  }
+}

@@ -6,19 +6,19 @@
 
 <%# Search form %>
 <div class="mt-8 max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
-  <%= simple_form_for :search, url: search_flights_path, method: :get, html: { class: "space-y-4" } do |f| %>
+  <%= simple_form_for "", url: search_flights_path, method: :get, html: { class: "space-y-4" } do |f| %>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <%= f.input :origin, placeholder: "From", input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
-      <%= f.input :destination, placeholder: "To", input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%= f.input :origin, placeholder: "From", input_html: { value: params[:origin], class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%= f.input :destination, placeholder: "To", input_html: {value: params[:destination], class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <%= f.input :departure, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%= f.input :departure, as: :date, html5: true, input_html: {value: params[:departure],  class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
       <%= f.input :round_trip, as: :boolean, label: "Round trip", label_html: { class: "text-gray-700" } %>
     </div>
 
     <div id="return-date-field" style="display: none;">
-      <%= f.input :return_date, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+      <%# <%= f.input :return_date, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %> %>
     </div>
 
     <div>

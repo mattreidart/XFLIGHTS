@@ -19,8 +19,8 @@ flights["data"].each do |flight|
   Flight.create!(
     airline: airline,
     flight_number: "#{ flight.dig("slices",0, "segments", 0,"marketing_carrier","iata_code")}#{flight.dig("slices",0,"segments",0,"operating_carrier_flight_number")}",
-    origin: flight.dig("slices",0,"segments",0,"origin","name"),
-    destination: flight.dig("slices",0,"segments",0,"destination","name"),
+    origin: flight.dig("slices",0,"segments",0,"origin","iata_code"),
+    destination: flight.dig("slices",0,"segments",0,"destination","iata_code"),
     price: flight.dig("total_amount"),
     departure: flight.dig("slices", 0, "segments", 0, "departing_at"),
     arrival: flight.dig("slices", 0, "segments", 0, "arriving_at")

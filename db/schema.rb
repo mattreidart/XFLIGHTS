@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_02_075928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "airline_id", null: false
-    t.integer "price"
     t.datetime "departure"
     t.datetime "arrival"
     t.index ["airline_id"], name: "index_flights_on_airline_id"

@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @bookings = @user.bookings.includes(:flight)
-                     .where('flights.departure_date >= ?', Date.today)
-                     .order('flights.departure_date ASC')
+                     .where('flights.departure >= ?', Date.today)
+                     .order('flights.departure ASC')
     @all_bookings = @user.bookings.all
   end
 

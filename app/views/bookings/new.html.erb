@@ -33,8 +33,7 @@
 
       <!-- Date of Birth -->
       <%= f.input :date_of_birth, as: :date, start_year: 1900, end_year: Date.today.year, order: [:day, :month, :year], label_html: { class: "block text_gray-700" }, input_html: { class: "w-full px-3 py-2 rounded bg-white"} %>
-  </div>
-
+    </div>
 
     <div>
       <%= f.button :submit, "Confirm Booking", class: "cursor-pointer w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition" %>

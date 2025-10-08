@@ -6,13 +6,13 @@ Rails.application.routes.draw do
 
   get 'flights/search', to: 'flights#search', as: :search_flights
 
-  resources :users, only: [:show]
+  resources :users, only: %i[show]
 
-  resources :flights, only: [:index, :show] do
-    resources :bookings, only: [:new, :create]
+  resources :flights, only: %i[index show] do
+    resources :bookings, only: %i[new create]
   end
 
-  resources :bookings, only: [:index, :show, :destroy]
+  resources :bookings, only: %i[index show destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

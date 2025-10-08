@@ -10,17 +10,17 @@
     <p><strong>Email:</strong> <%= @user.email %></p>
   </div>
 
-  <% if @all_bookings.empty? %>
+  <% if @bookings.empty? %>
     <!-- No Bookings -->
     <div class="bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-6 hover:shadow-xl transition">
       <div class="flex items-center space-x-4">
-        <h2 class="text-lg font-semibold text-gray-700">Looks like you have no bookings!</h2>
+        <h2 class="text-lg font-semibold text-gray-700">Looks like you have no upcoming bookings!</h2>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
         </svg>
       </div>
 
-      <%= link_to "Book your next adventure here", root_path, class: "inline-block text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-md text-sm font-semibold transition" %>
+      <%= link_to "Book your next adventure here", flights_path, class: "inline-block text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-md text-sm font-semibold transition" %>
     </div>
 
   <% else %>
@@ -29,9 +29,13 @@
       <% @bookings.each do |booking| %>
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 hover:shadow-xl transition">
 
-          <!-- Airline Logo -->
+          <!-- Airline Logo (optional fallback) -->
           <div class="flex-shrink-0">
-            <img class="h-24 w-48 object-cover rounded" src="<%= booking.airline.logo %>" alt="Airline Logo">
+            <% if booking.flight.airline&.logo.present? %>
+              <img class="h-24 w-48 object-cover rounded" src="<%= booking.flight.airline.logo %>" alt="Airline Logo">
+            <% else %>
+              <div class="h-24 w-48 flex items-center justify-center bg-gray-200 rounded text-gray-500 text-sm">No Logo</div>
+            <% end %>
           </div>
 
           <!-- Flight Info -->
@@ -51,6 +55,8 @@
         </div>
       <% end %>
     </div>
+    <div class="mt-6 flex justify-center">
+    <%= link_to "View All Bookings", bookings_path, class: "bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-md font-semibold transition" %>
   <% end %>
 
 </div>

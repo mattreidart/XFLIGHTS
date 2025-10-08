@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   root to: "pages#home"
 
   get 'flights/search', to: 'flights#search', as: :search_flights
+
+  resources :users, only: [:show]
 
   resources :flights, only: [:index, :show] do
     resources :bookings, only: [:new, :create]

@@ -4,48 +4,137 @@
   <p class="text-center text-gray-500 text-lg mt-6">No flights found. Try adjusting your search criteria.</p>
 <% end %>
 <%# Search form %>
-<div class="mt-8 max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
-  <%= simple_form_for "", url: search_flights_path, method: :get, html: { class: "space-y-4" } do |f| %>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <%= f.input :origin, placeholder: "From", input_html: { value: params[:origin], class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
-      <%= f.input :destination, placeholder: "To", input_html: {value: params[:destination], class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
+<div class="pt-12 pb-16 px-6">
+  <div class="max-w-4xl mx-auto">
+    <!-- Search Form Card -->
+    <div class="bg-white shadow-2xl rounded-2xl p-8 border border-purple-100">
+      <%= simple_form_for "", url: search_flights_path, method: :get, html: { class: "space-y-6" } do |f| %>
+
+        <!-- Origin and Destination Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <%= f.input :origin,
+                placeholder: "Departure City",
+                input_html: {
+                  value: params[:origin],
+                  class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+                },
+                label_html: { class: "text-gray-700 font-semibold mb-2 block" } %>
+          </div>
+          <div>
+            <%= f.input :destination,
+                placeholder: "Arrival City",
+                input_html: {
+                  value: params[:destination],
+                  class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+                },
+                label_html: { class: "text-gray-700 font-semibold mb-2 block" } %>
+          </div>
+        </div>
+
+        <!-- Departure Date and Round Trip Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+          <div class="md:col-span-2">
+            <%= f.input :departure,
+                as: :date,
+                html5: true,
+                input_html: {
+                  value: params[:departure],
+                  class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+                },
+                label_html: { class: "text-gray-700 font-semibold mb-2 block" } %>
+          </div>
+          <div class="flex items-center h-full pb-2">
+            <%= f.input :round_trip,
+                as: :boolean,
+                label: "Round trip",
+                input_html: { class: "w-5 h-5 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" },
+                label_html: { class: "text-gray-700 font-semibold ml-2" } %>
+          </div>
+        </div>
+
+        <!-- Return Date Field (Hidden by default) -->
+        <div id="return-date-field" class="hidden">
+          <%# <%= f.input :return_date, as: :date, html5: true, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" }, label_html: { class: "text-gray-700 font-semibold mb-2 block" } %>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4">
+          <%= f.button :submit, "Search Flights", class: "w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 px-6 rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" %>
+        </div>
+
+      <% end %>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <%= f.input :departure, as: :date, html5: true, input_html: {value: params[:departure],  class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %>
-      <%= f.input :round_trip, as: :boolean, label: "Round trip", label_html: { class: "text-gray-700" } %>
-    </div>
-    <div id="return-date-field" style="display: none;">
-      <%# <%= f.input :return_date, as: :date, html5: true, input_html: { class: "w-full rounded border-gray-300 focus:ring-purple-500 focus:border-purple-500" }, label_html: { class: "text-gray-700" } %> %>
-    </div>
-    <div>
-      <%= f.button :submit, "Search Flights", class: "w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition" %>
-    </div>
-  <% end %>
+  </div>
 </div>
 
-<%# Flights display section %>
-<div class="bg-purple-50 py-10">
-  <div class="flex flex-col items-center space-y-6">
-    <% @flights.each do |flight| %>
-      <div class="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl space-y-4 md:space-y-0 md:space-x-6 transition hover:shadow-xl">
-        <!-- Airline Logo -->
-        <div class="flex-shrink-0">
-          <img class="h-24 w-48 object-cover rounded" src="<%= flight.airline.logo %>" alt="Airline Logo">
-        </div>
-        <!-- Flight Details -->
-        <div class="flex-1 text-gray-800 space-y-1">
-          <p class="font-semibold text-lg"><%= flight.airline.name %> : <%= flight.flight_number %></p>
-          <p>From: <%= flight.origin %></p>
-          <p>Departure: <%= flight.departure.strftime("%b %d, %Y %I:%M %p") %></p>
-          <p>To: <%= flight.destination %></p>
-          <p>Arrival: <%= flight.arrival.strftime("%b %d, %Y %I:%M %p") %></p>
-        </div>
-        <!-- Price -->
-        <div class="text-right">
-          <p class="text-lg font-bold text-green-600">Price: $<%= flight.price %></p>
-          <button type="button" class="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"><%= link_to "Book Now!", new_flight_booking_path(flight) %></button>
+<div class="space-y-6 w-3/4 mx-auto">
+  <% @flights.each do |flight| %>
+    <div class="group bg-white border-2 border-purple-100 hover:border-purple-400 shadow-md hover:shadow-2xl transition-all duration-300 rounded-xl overflow-hidden transform hover:-translate-y-1">
+
+      <div class="p-6">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+          <!-- Airline Info -->
+          <div class="flex items-center space-x-4 lg:w-1/5">
+            <div class="flex-shrink-0 bg-purple-50 rounded-lg p-3">
+              <img class="h-16 w-24 object-contain" src="<%= flight.airline.logo %>" alt="<%= flight.airline.name %> Logo">
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 group-hover:text-purple-700 transition"><%= flight.airline.name %></h3>
+              <p class="text-sm text-gray-500"><%= flight.flight_number %></p>
+            </div>
+          </div>
+
+          <!-- Flight Route & Times -->
+          <div class="flex-1 lg:w-2/5">
+            <div class="flex items-center justify-between">
+
+              <!-- Departure -->
+              <div class="text-left">
+                <p class="text-3xl font-bold text-gray-800"><%= flight.departure.strftime("%I:%M %p") %></p>
+                <p class="text-sm font-semibold text-purple-600 mt-1"><%= flight.origin %></p>
+                <p class="text-xs text-gray-500"><%= flight.departure.strftime("%b %d, %Y") %></p>
+              </div>
+
+              <!-- Flight Path -->
+              <div class="flex-1 mx-4 flex flex-col items-center">
+                <div class="flex items-center w-full">
+                  <div class="h-2 w-2 bg-purple-400 rounded-full"></div>
+                  <div class="flex-1 h-0.5 bg-purple-300 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  </div>
+                  <div class="h-2 w-2 bg-purple-400 rounded-full"></div>
+                </div>
+                <% duration = ((flight.arrival - flight.departure) / 3600).round(1) %>
+                <p class="text-xs text-gray-500 mt-2"><%= duration %>h duration</p>
+              </div>
+
+              <!-- Arrival -->
+              <div class="text-right">
+                <p class="text-3xl font-bold text-gray-800"><%= flight.arrival.strftime("%I:%M %p") %></p>
+                <p class="text-sm font-semibold text-purple-600 mt-1"><%= flight.destination %></p>
+                <p class="text-xs text-gray-500"><%= flight.arrival.strftime("%b %d, %Y") %></p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Price & Book Button -->
+          <div class="lg:w-1/5 flex flex-col items-center lg:items-end space-y-3 lg:border-l lg:border-purple-100 lg:pl-6">
+            <div class="text-center lg:text-right">
+              <p class="text-xs text-gray-500 uppercase tracking-wide">From</p>
+              <p class="text-3xl font-bold text-purple-700">$<%= rand(200..800) %></p>
+              <p class="text-xs text-gray-500">per person</p>
+            </div>
+            <%= link_to "Select Flight", new_flight_booking_path(flight), class: "w-full lg:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-300 font-semibold text-center shadow-md hover:shadow-lg" %>
+          </div>
+
         </div>
       </div>
-    <% end %>
-  </div>
+      <div class="h-1 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+  <% end %>
 </div>

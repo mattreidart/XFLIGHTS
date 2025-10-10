@@ -1,31 +1,66 @@
 <%= render "shared/navbar" %>
 
-
-<div class="pt-4 w-3/4  mx-auto">
-  <div class="mx-auto">
-    <h2>Sign up</h2>
+<div class="flex justify-center pt-24 pb-12 bg-purple-50 min-h-screen">
+  <div class="m-t 4 w-11/12 md:w-3/4 mx-auto max-w-5xl">
+    <div class="bg-white shadow-2xl rounded-2xl p-8 border border-purple-100">
+      <div class="text-center mb-4">
+        <p class="mb-4 text-gray-700 text-xl">
+          Join the club!
+        </p>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+        <div class="flex">
+          <!-- Title -->
+          <div class="w-1/2 mr-2">
+            <%= f.input :title, collection: ['Mr', 'Ms', 'Mrs', 'Miss', 'Dr'], prompt: "Select title", label_html: { class: "text-gray-700 font-semibold mb-2 block"  }, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+          <!-- Gender -->
+          <div class="w-1/2 ml-2">
+            <%= f.input :gender, collection: ['Male', 'Female', 'Other'], prompt: "Select title", label_html: { class: "text-gray-700 font-semibold mb-2 block"  }, input_html: { class: "w-full px-2 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+        </div>
+        <div class="flex">
+          <!-- First Name -->
+          <div class="w-1/2 mr-2 ">
+            <%= f.input :first_name, label_html:  { class: "text-gray-700 font-semibold mb-2 block" }, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+          <!-- Middle Name -->
+          <div class="w-1/2 ml-2">
+            <%= f.input :middle_name, label_html:  { class: "text-gray-700 font-semibold mb-2 block" }, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+        </div>
+        <div class="flex">
+          <!-- Last Name -->
+          <div class="w-1/2 mr-2">
+            <%= f.input :last_name, label_html:  { class: "text-gray-700 font-semibold mb-2 block" }, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+          <div class="w-1/2 ml-2">
+            <%= f.input :phone_number, label_html:  { class: "text-gray-700 font-semibold mb-2 block" }, input_html: { class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" } %>
+          </div>
+        </div>
+        <div>
+          <!-- Date of Birth -->
+          <%= f.input :date_of_birth, as: :date, start_year: 1900, end_year: Date.today.year, order: [:day, :month, :year], label_html: { class: "block text_gray-700" }, input_html: { class: "w-full px-3 py-2 rounded bg-white"} %>
+        </div>
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div>
+          <%= f.button :submit, "Sign up", class: "w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 px-6 rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" %>
+        </div>
+        <%= render "devise/shared/links", class: "text-center" %>
+      <% end %>
+    </div>
   </div>
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-inputs">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up", class: "w-full" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
 </div>

@@ -13,6 +13,7 @@ class BookingsController < ApplicationController
   end
 
   def show
+
   end
 
   def create
@@ -38,7 +39,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:title, :first_name, :last_name, :middle_name, :date_of_birth, :gender)
+    params.require(:booking).permit(:title, :first_name, :last_name, :middle_name, :date_of_birth, :gender, :phone_number)
     # or possibly passenger.name and passenger.email etc
   end
 end

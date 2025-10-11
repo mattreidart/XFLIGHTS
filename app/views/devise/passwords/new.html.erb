@@ -1,20 +1,28 @@
-<div class="pt-4 w-3/4  mx-auto">
-  <h2>Forgot your password?</h2>
+<%= render "shared/navbar"%>
 
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= f.error_notification %>
+<div class="flex justify-center pt-24 pb-12 bg-purple-50 min-h-screen">
+  <div class="w-11/12 md:w-3/4 mx-auto max-w-5xl">
+    <div class="bg-white shadow-2xl rounded-2xl p-8 border border-purple-100">
+      <div class="text-center mb-4">
+        <p class="mb-4 text-gray-700 text-xl">
+          Forgot Password?
+        </p>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.error_notification %>
 
-    <div class="form-inputs">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" } %>
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Send me reset password instructions", class: "w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 px-6 rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" %>
+      </div>
+        <%= render "devise/shared/links", class: "text-center" %>
+      <% end %>
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Send me reset password instructions", class: "w-full" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+  </div>
 </div>

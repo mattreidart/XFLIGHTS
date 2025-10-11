@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_08_085249) do
     t.string "phone_number"
     t.string "gender"
     t.date "date_of_birth"
+    t.string "status"
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -68,6 +69,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_08_085249) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
+    t.string "title"
+    t.string "gender"
+    t.string "phone_number"
+    t.string "middle_name"
+    t.date "date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

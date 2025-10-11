@@ -1,2 +1,9 @@
-<h1>Flights#show</h1>
-<p>Find me in app/views/flights/show.html.erb</p>
+<!-- app/views/flights/show.html.erb -->
+<h1>Flight <%= @flight.flight_number %></h1>
+<p><%= @flight.origin %> → <%= @flight.destination %></p>
+<div
+  data-controller="map"
+  data-map-api-key-value="<%= ENV['pk.eyJ1IjoibGV3YWdvbm1hdHRyZWlkIiwiYSI6ImNtZ2hxc2I3MzAwejkybHBzOW5kb3E1ejAifQ.YUbnsNn_33bL573qYJgNFA'] %>"
+  data-map-markers-value="<%= @markers.to_json %>"
+  style="width: 100%; height: 400px;">
+</div>

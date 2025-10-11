@@ -1,35 +1,25 @@
 class FlightsController < ApplicationController
-  def index
-    @flights = Flight.all
-  end
-
-  def show
-  end
-
+  # GET /flights/search
   def search
-    #All flights
-    @flights = Flight.all
-    #access params[search]
+    # Ensure params are present
+    flight_params = params.fetch(:flight, {})
+    origin = flight_params[:origin].presence
+    destination = flight_params[:destination].presence
+    departure = flight_params[:departure].presence
 
-    #Match origin and destination
-    @flights = @flights.where(origin: params[:origin]) if params[:origin].present?
-    @flights = @flights.where(destination: params[:destination]) if params[:destination].present?
-    @flights = @flights.where(departure: params[:departure].to_date.all_day) if params[:departure].present?
+    # Initialize @flights as empty relation by default
+    @flights = Flight.none
 
-    flash.now[:notice] = 'No matching flights found.' if @flights.empty?
-    #check to see if return flight is included
-    # if search_params[:round_trip].present? && search_params[:return_date].present?
-    #   @return_flights = Flight.all
-    #   @return_flights = @return_flights.where(origin: search_params[:destination])
-    #   @return_flights = @return_flights.where(destination: search_params[:origin])
-    #   @return_flights = @return_flights.where(departure: search_params[:return_date].to_date.all_day)
-    #   flash.now[:notice] = 'No matching return flights found.' if @return_flights.empty?
-    # end
-  end
-
-  private
-
-  def set_flight
-    @flight = Flight.find(params[:id])
+    # Only query if at least origin and destination are present
+    if origin && destination && departure
+      # Convert departure param to date
+      begin
+        departure_date = Date.parse(departure)
+        @flights = Flight.where(origin: origin, destination: destination)
+                        .where(departure: departure_date.beginning_of_day..departure_date.end_of_day)
+      rescue ArgumentError
+        @flights = Flight.none
+      end
+    end
   end
 end

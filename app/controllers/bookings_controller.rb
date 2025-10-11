@@ -1,10 +1,18 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :destroy]
+  before_action :set_booking, only: %i[show destroy]
   before_action :authenticate_user!
 
   def index
-    @bookings = current_user.bookings.includes(flight: :airline)
-    # flash[:notice] = "This is a random message"
+    sort = params[:sort]
+    dir = params[:direction] == "desc" ? "desc" : "asc"
+    map = {
+      "airline" => "airlines.name",
+      "route" => Arel.sql("flights.origin || '-' || flights.destination"),
+      "departure" => "flights.departure",
+      "arrival" => "flights.arrival"
+    }
+    order_clause = map[sort] ? "#{map[sort]} #{dir}" : "bookings.created_at DESC"
+    @bookings = Booking.includes(flight: :airline).joins(flight: :airline).order(Arel.sql(order_clause))
   end
 
   def new
@@ -13,7 +21,8 @@ class BookingsController < ApplicationController
   end
 
   def show
-
+    @booking = current_user.bookings.find_by(id: params[:id])
+    return redirect_to bookings_path, alert: "Booking not found or access denied." unless @booking
   end
 
   def create
@@ -28,8 +37,9 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to bookings_path, notice: "Booking successfully cancelled"
+    redirect_to bookings_path, notice: "Booking successfully deleted"
   end
 
   private

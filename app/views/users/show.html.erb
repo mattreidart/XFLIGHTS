@@ -59,7 +59,7 @@
               </p>
             </div>
 
-            <!-- Link to edit user profile -->
+            <!-- Link to edit user profile and View All Bookings -->
             <div class="pt-2">
               <%= link_to edit_user_registration_path, class: "inline-flex items-center justify-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,6 +68,7 @@
                 Update Info
               <% end %>
             </div>
+            <%= link_to "View All Bookings", bookings_path, class: "inline-flex items-center justify-center w-full bg-white hover:bg-purple-50 text-purple-700 border-2 font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" %>
           </div>
         </div>
 

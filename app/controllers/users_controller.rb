@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.all
+    @bookings = Bookings.includes(:user, :flight).order('flights.departure ASC')
   end
 
   def show

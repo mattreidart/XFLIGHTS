@@ -1,58 +1,64 @@
 <%= render "shared/navbar" %>
 
-<div class="w-full max-w-3xl mx-auto">
-  <h1 class="text-3xl font-bold text-purple-700 mb-6">Your Bookings</h1>
-    <% if @bookings.any? %>
-      <table class="w-full table-auto border-collapse">
-        <thead>
-        <tr class="bg-purple-100 text-left text-sm text-purple-700 uppercase tracking-wide">
-          <th class="px-4 py-2"><%= sortable "airline", "Airline" %></th>
-          <th class="px-4 py-2">Flight</th>
-          <th class="px-4 py-2"><%= sortable "route", "Route" %></th>
-          <th class="px-4 py-2"><%= sortable "departure", "Departure" %></th>
-          <th class="px-4 py-2"><%= sortable "arrival", "Arrival" %></th>
-          <th class="px-4 py-2 text-center">Actions</th>
-        </tr>
-        </thead>
-
-        <tbody class="divide-y divide-purple-100">
-          <% @bookings.each do |booking| %>
-            <tr class="hover:bg-purple-50 transition">
-              <td class="px-4 py-3 align-middle whitespace-nowrap">
-                <div class="flex items-center gap-2">
-                  <% if booking.flight.airline.logo.present? %>
-                    <img src="<%= booking.flight.airline.logo %>" alt="<%= booking.flight.airline.name %> logo" class="h-5 w-5 object-contain" />
-                  <% end %>
-                  <span class="font-semibold text-gray-800"><%= booking.flight.airline.name %></span>
-                </div>
-              </td>
-              <td class="px-4 py-3 text-gray-600"><%= booking.flight.flight_number %></td>
-              <td class="px-4 py-3 text-gray-600 whitespace-nowrap">
-                <span class="font-semibold"><%= booking.flight.origin %></span> → <span class="font-semibold"><%= booking.flight.destination %></span>
-              </td>
-              <td class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
-                <%= booking.flight.departure.strftime("%b %d, %Y %l:%M %p") %>
-              </td>
-              <td class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
-                <%= booking.flight.arrival.strftime("%b %d, %Y %l:%M %p") %>
-              </td>
-              <td class="px-4 py-3 text-center">
-                <div class="flex justify-center gap-2 whitespace-nowrap">
-                  <%= link_to "Flight Info", flight_path(booking.flight), class: "bg-white hover:bg-purple-50 text-purple-700 border-2 border-purple-700 font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200" %>
-                  <%= link_to "View Booking", booking_path(booking), class: "bg-purple-700 hover:bg-purple-900 text-white font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" %>
-                  <%= button_to booking_path(booking), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this booking?" }, class: "flex items-center gap-1 bg-red-600 hover:bg-red-800 text-white font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" do %>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m3 0h6" />
-                    </svg>
-                    Delete
-                  <% end %>
-                </div>
-              </td>
+<div class="w-full max-w-5xl mx-auto my-8">
+  <div class="bg-gradient-to-br from-white to-purple-50 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-purple-100">
+    <div class="min-h-screen bg-gradient-to-b from-purple-50 to-white ">
+      <div class="bg-purple-700 text-white text-center">
+        <h1 class="text-lg text-white-800 p-4">Your Bookings</h1>
+      </div>
+        <% if @bookings.any? %>
+          <table class="w-full table-auto border-collapse">
+            <thead>
+            <tr class="bg-purple-100 text-left text-sm text-purple-700 uppercase tracking-wide">
+              <th class="px-4 py-2"><%= sortable "airline", "Airline" %></th>
+              <th class="px-4 py-2">Flight</th>
+              <th class="px-4 py-2"><%= sortable "route", "Route" %></th>
+              <th class="px-4 py-2"><%= sortable "departure", "Departure" %></th>
+              <th class="px-4 py-2"><%= sortable "arrival", "Arrival" %></th>
+              <th class="px-4 py-2 text-center">Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p class="text-gray-600 text-center">You have no bookings yet.</p>
-    <% end %>
+            </thead>
+
+            <tbody class="divide-y divide-purple-100">
+              <% @bookings.each do |booking| %>
+                <tr class="hover:bg-purple-50 transition">
+                  <td class="px-4 py-3 align-middle whitespace-nowrap">
+                    <div class="flex items-center gap-2">
+                      <% if booking.flight.airline.logo.present? %>
+                        <img src="<%= booking.flight.airline.logo %>" alt="<%= booking.flight.airline.name %> logo" class="h-5 w-5 object-contain" />
+                      <% end %>
+                      <span class="font-semibold text-gray-800"><%= booking.flight.airline.name %></span>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3 text-gray-600"><%= booking.flight.flight_number %></td>
+                  <td class="px-4 py-3 text-gray-600 whitespace-nowrap">
+                    <span class="font-semibold"><%= booking.flight.origin %></span> → <span class="font-semibold"><%= booking.flight.destination %></span>
+                  </td>
+                  <td class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
+                    <%= booking.flight.departure.strftime("%b %d, %Y %l:%M %p") %>
+                  </td>
+                  <td class="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
+                    <%= booking.flight.arrival.strftime("%b %d, %Y %l:%M %p") %>
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    <div class="flex justify-center gap-2 whitespace-nowrap">
+                      <%= link_to "Flight Info", flight_path(booking.flight), class: "bg-white hover:bg-purple-50 text-purple-700 border-2 border-purple-700 font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200" %>
+                      <%= link_to "View Booking", booking_path(booking), class: "bg-purple-700 hover:bg-purple-900 text-white font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" %>
+                      <%= button_to booking_path(booking), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this booking?" }, class: "flex items-center gap-1 bg-red-600 hover:bg-red-800 text-white font-semibold text-sm py-2 px-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m3 0h6" />
+                        </svg>
+                        Delete
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p class="text-gray-600 text-center">You have no bookings yet.</p>
+        <% end %>
+    </div>
+  </div>
 </div>

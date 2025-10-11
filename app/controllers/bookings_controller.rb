@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bookings = current_user.bookings.includes(:flight)
+    @bookings = current_user.bookings.includes(flight: :airline)
     # flash[:notice] = "This is a random message"
   end
 

@@ -1,112 +1,158 @@
 <%= render "shared/navbar" %>
 
 <div class="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12">
-  <div class="w-11/12 md:w-3/4 mx-auto max-w-5xl">
+  <div class="w-11/12 md:w-3/4 mx-auto max-w-6xl">
+    <div class="flex flex-col lg:flex-row gap-8">
 
-    <!-- Header -->
-    <div class="mb-8">
-      <h2 class="text-4xl text-purple-700 font-bold text-center bg-purple-100 px-6 py-4 rounded-lg shadow-sm">
-        Booking Confirmation
-      </h2>
-    </div>
+      <!-- Passenger Details -->
+      <div class="lg:w-1/3 space-y-6 lg:sticky lg:top-8 lg:self-start">
+        <h2 class="text-2xl font-bold text-purple-700 border-b-2 border-purple-200 pb-2 mb-4">
+          Passenger Details
+        </h2>
 
-    <!-- Main Content Card -->
-    <div class="bg-white shadow-lg rounded-xl p-8 hover:shadow-2xl transition-shadow duration-300">
+        <div class="space-y-4">
+          <div class="flex justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-20 h-20 text-purple-700">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+            </svg>
+          </div>
 
-      <div class="flex">
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Full Name</p>
+            <p class="text-lg font-medium text-gray-800">
+              <%= @booking.title %> <%= @booking.first_name %> <%= @booking.last_name %>
+            </p>
+          </div>
 
-        <!-- Passenger Details Section -->
-        <div class="w-1/3 mr-2">
-          <h2 class="text-2xl font-bold text-purple-700 border-b-2 border-purple-200 pb-2 mb-4">
-            Passenger
-          </h2>
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Gender</p>
+            <p class="text-lg font-medium text-gray-800">
+              <%= @booking.gender %>
+            </p>
+          </div>
 
-          <div class="space-y-4">
-            <div>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-20 text-purple-700">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Mobile</p>
+            <p class="text-lg font-medium text-gray-800">
+              <%= @booking.phone_number %>
+            </p>
+          </div>
+
+          <div class="bg-purple-50 p-4 rounded-lg">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Date Of Birth</p>
+            <p class="text-lg font-medium text-gray-800">
+              <%= @booking.date_of_birth.strftime('%a %b %d, %Y') %>
+            </p>
+          </div>
+
+          <div class="pt-2">
+            <%= link_to edit_user_registration_path, class: "inline-flex items-center justify-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Full Name</p>
-              <p class="text-lg font-medium text-gray-800 mt-1">
-                <%= @booking.title %> <%= @booking.first_name %> <%= @booking.last_name %>
-              </p>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Gender</p>
-              <p class="text-lg font-medium text-gray-800 mt-1">
-                <%= @booking.gender %>
-              </p>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Mobile</p>
-              <p class="text-lg font-medium text-gray-800 mt-1">
-                <%= @booking.phone_number %>
-              </p>
-            </div>
+              Update Info
+            <% end %>
           </div>
         </div>
+      </div>
 
-        <!-- Flight Info Section -->
-        <div class="w-2/3 ml-2">
-          <h2 class="text-2xl font-bold text-purple-700 border-b-2 border-purple-200 pb-2 mb-4">
-            Flight Information
-          </h2>
+      <!-- Flight Information Section -->
+      <div class="lg:w-2/3 space-y-6">
+        <h2 class="text-2xl font-bold text-purple-700 border-b-2 border-purple-200 pb-2 mb-4">
+          Flight Information
+        </h2>
 
-          <!-- Airline Info -->
-          <div class="flex justify-between bg-purple-50 p-4 rounded-lg">
-            <img class="h-20 w-32 object-contain rounded" src="<%= @booking.flight.airline.logo %>" alt="<%= @booking.flight.airline.name %> Logo">
-            <div class="mt-4 flex flex-col items-center">
-              <p class="text-lg font-bold text-gray-800"><%= @booking.flight.airline.name %></p>
-              <p class="text-sm text-gray-600">Flight <%= @booking.flight.flight_number %></p>
-            </div>
-            <div class="mt-4 flex flex-col items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        <div class="bg-gradient-to-br from-white to-purple-50 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-purple-100">
+
+          <!-- Airline Header -->
+          <div class="bg-purple-700 text-white px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
-              <%= link_to "Flight Info",  flight_path, class: "underline" %>
+              <div>
+                <p class="font-bold text-lg"><%= @booking.flight.airline.name %></p>
+                <p class="text-sm text-purple-200">Flight <%= @booking.flight.flight_number %></p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-2xl font-bold">$<%= @booking.flight.price %></p>
             </div>
           </div>
 
-          <!-- Route -->
-          <div class="flex items-center justify-between bg-gradient-to-r from-purple-100 to-purple-50 p-4 rounded-lg">
-            <div class="text-center">
-              <p class="text-2xl font-bold text-purple-700"><%= @booking.flight.origin %></p>
-              <p class="text-xs text-gray-600 mt-1">Origin</p>
+          <div class="p-6 space-y-4">
+            <!-- Airline Logo -->
+            <div class="flex justify-center bg-white p-4 rounded-lg border border-purple-100">
+              <img class="h-20 w-auto object-contain" src="<%= @booking.flight.airline.logo %>" alt="<%= @booking.flight.airline.name %> Logo">
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-            </svg>
+            <!-- Route -->
+            <div class="flex items-center justify-between bg-gradient-to-r from-purple-100 to-purple-50 p-6 rounded-lg">
+              <div class="text-center flex-1">
+                <p class="text-3xl font-bold text-purple-700"><%= @booking.flight.origin %></p>
+                <p class="text-xs text-gray-600 mt-1 uppercase tracking-wide">Origin</p>
+              </div>
 
-            <div class="text-center">
-              <p class="text-2xl font-bold text-purple-700"><%= @booking.flight.destination %></p>
-              <p class="text-xs text-gray-600 mt-1">Destination</p>
+              <div class="mx-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+              </div>
+
+              <div class="text-center flex-1">
+                <p class="text-3xl font-bold text-purple-700"><%= @booking.flight.destination %></p>
+                <p class="text-xs text-gray-600 mt-1 uppercase tracking-wide">Destination</p>
+              </div>
             </div>
-          </div>
 
-          <!-- Departure Info -->
-          <div class="flex justify-between">
-            <div class="space-y-1">
-              <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Departure</p>
-              <p class="text-base font-medium text-gray-800"><%= @booking.flight.origin %></p>
-              <p class="text-sm text-gray-600"><%= @booking.flight.departure.strftime("%l:%M %p %Z") %></p>
-              <p class="text-sm text-gray-600"><%= @booking.flight.departure.strftime("%A, %B %d, %Y") %></p>
+            <!-- Departure & Arrival Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-lg border border-purple-100">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                  Departure
+                </p>
+                <p class="text-lg font-bold text-gray-800"><%= @booking.flight.origin %></p>
+                <p class="text-2xl font-bold text-purple-700"><%= @booking.flight.departure.strftime("%l:%M %p") %></p>
+                <p class="text-sm text-gray-600"><%= @booking.flight.departure.strftime("%A, %B %d, %Y") %></p>
+              </div>
+
+              <div class="bg-white p-4 rounded-lg border border-purple-100">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                  Arrival
+                </p>
+                <p class="text-lg font-bold text-gray-800"><%= @booking.flight.destination %></p>
+                <p class="text-2xl font-bold text-purple-700"><%= @booking.flight.arrival.strftime("%l:%M %p") %></p>
+                <p class="text-sm text-gray-600"><%= @booking.flight.arrival.strftime("%A, %B %d, %Y") %></p>
+              </div>
             </div>
 
-            <!-- Arrival Info -->
-            <div class="space-y-1">
-              <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Arrival</p>
-              <p class="text-base font-medium text-gray-800"><%= @booking.flight.destination %></p>
-              <p class="text-sm text-gray-600"><%= @booking.flight.arrival.strftime("%l:%M %p %Z") %></p>
-              <p class="text-sm text-gray-600"><%= @booking.flight.arrival.strftime("%A, %B %d, %Y") %></p>
+            <!-- Action Buttons -->
+            <div class="flex gap-3 pt-2">
+              <%= link_to flight_path(@booking.flight), class: "flex-1 inline-flex items-center justify-center bg-white hover:bg-purple-50 text-purple-700 border-2 border-purple-700 font-semibold py-2 px-4 rounded-lg transition-colors duration-200" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Flight Info
+              <% end %>
+              <%= link_to booking_path(@booking),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to cancel this booking?" },
+                class: "flex-1 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                </svg>
+                Cancel Booking
+              <% end %>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
+</div>
